@@ -1,0 +1,87 @@
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<form [formGroup]="profileForm" >
+
+
+  <div class="form-group">
+    <label for=""> First Name</label>
+    <input   type="text" formControlName="fname" name="fname">
+    <span  *ngIf="profileForm.get('fname').hasError('pattern') && (profileForm.controls.fname.dirty || profileForm.controls.fname.touched)"  class="text-danger"> 
+      onyl Print Letter,and more than 3
+    </span>
+    
+
+  </div>
+
+
+  <div class="form-group">
+    <label for="">Family Name</label>
+    <input type="text" formControlName="lname"  name="lname">
+    <span class="text-danger" *ngIf="profileForm.get('lname').hasError('pattern') && (profileForm.controls.lname.dirty||profileForm.controls.lname.touched)">
+      Start with letter 
+    </span>
+    <span class="text-danger" *ngIf="profileForm.get('lname').hasError('minlength') &&  (profileForm.controls.lname.dirty||profileForm.controls.lname.touched)">
+      length is 2-15
+    </span>
+  </div>
+
+  <div class="form-group">
+    <label for=""> Contact Number</label>
+    <input type="text" formControlName="number">
+    <span class="text-danger" *ngIf="profileForm.get('number').hasError('pattern') && (profileForm.controls.number.dirty||profileForm.controls.number.touched)">
+      Plase enther Contact number (Start with 021)
+    </span> 
+    <span class="text-danger" *ngIf="profileForm.get('number').hasError('minlength')&& profileForm.get('number').touched">
+           lenght is 11
+    </span> 
+  </div>
+  <div class="form-group">
+      <label for="">Email Address</label>
+      <input type="mail" formControlName="mail" >
+      <span class="text-danger" *ngIf="profileForm.controls.mail.invalid && (profileForm.controls.mail.dirty || profileForm.controls.mail.touched)">
+            please enther Email
+      </span>
+  </div>
+   <!-- <div class="form-group">
+    <label for="">Age</label>
+    <input type="number" formControlName="age" required/>  
+      <span class="text-danger" *ngIf="profileForm.controls.age.invalid && (profileForm.controls.age.dirty || profileForm.controls.age.touched)">
+      plkease enter age, between 20-120
+      </span>      
+  </div> -->
+  
+  
+  <div class="form-group">
+    <label for="">Message</label>
+    <input type="mail" formControlName="message" >
+    <span class="text-danger" *ngIf="profileForm.controls.message.invalid && (profileForm.controls.message.dirty || profileForm.controls.message.touched)">
+          please enther a message, length>5
+    </span>
+</div>
+  <div class="form-group">
+    <label>Birthday</label>
+    <input [matDatepicker]="myDatepicker" formControlName="age" [min]="minDate" [max]="maxDate" required>
+    <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
+    <mat-datepicker #myDatepicker></mat-datepicker>
+     <span *ngIf="profileForm.get('age').hasError('matDatepickerMin') || profileForm.get('age').hasError('matDatepickerMax') ">
+        please enter the date between 1/1/2000-1/1/2020
+     </span> 
+    
+  </div>
+  
+
+  <div class="form-group">
+    <button type="submit"  (click)="onSubmit()">Submit</button>
+    &nbsp;&nbsp;
+    <button type="cancel" (click)="cancel()">Cancel</button>     
+    
+  </div>
+ 
+    <a routerLink="/data">Read More</a>
+  
+   
+   
+ 
+</form>
+<div style="color:red" *ngIf="errorMessage"> {{errorMessage}}</div>
+<div style="color:red" *ngIf="rightMessage">{{rightMessage}}</div>

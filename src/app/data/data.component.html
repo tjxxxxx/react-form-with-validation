@@ -1,0 +1,15 @@
+<p>data works!</p>
+
+<ul *ngIf="users | async as users else noData">
+        <li *ngFor="let user of users"> 
+            <!-- <span>UserId:{{user.userId}}</span> -->
+            <span>Title: {{user.title}}</span> 
+           
+            <div>id:{{user.id}}</div>
+            
+            <div>body:{{user.body}}</div>
+            <hr>  
+        </li> 
+</ul>
+<ng-template #noData>No Data Available</ng-template>
+<a routerLink="/form">Return back</a>
